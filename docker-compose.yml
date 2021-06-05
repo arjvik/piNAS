@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  hello-world:
+    image: hello-world
+  ubuntu:
+    image: ubuntu:20.04
+    command: head -n1 /etc/os-release
