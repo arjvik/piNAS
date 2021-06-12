@@ -5,4 +5,4 @@ services:
     image: hello-world
   ubuntu:
     image: ubuntu:20.04
-    command: head -n1 /etc/os-release
+    command: bash -c 'source /etc/os-release; echo Hello from $$NAME'
