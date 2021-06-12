@@ -1,8 +1,10 @@
 version: "3.9"
 
 services:
-  hello-world:
-    image: hello-world
-  ubuntu:
-    image: ubuntu:20.04
-    command: bash -c 'source /etc/os-release; echo Hello from $$NAME'
+  http-server:
+    image: python:3.9.5-alpine3.13
+    command: python3 -m http.server --directory /mnt 8080
+    ports:
+      - 8080:8080
+    volumes:
+      - /mnt/NAS1_DATA/files/www/:/mnt
