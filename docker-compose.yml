@@ -1,10 +1,16 @@
 version: "3.9"
 
 services:
-  http-server:
-    image: python:3.9.5-alpine3.13
-    command: python3 -m http.server --directory /mnt 8080
+  sftpgo:
+    image: drakkan/sftpgo:v2.0.4-alpine-slim
+    environment:
+      - SFTPGO_WEBDAVD__BINDINGS__0__PORT=10080
+      - SFTPGO_WEBDAVD__DATA_PROVIDER__DRIVER=memory
+      - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
     ports:
       - 8080:8080
+      - 2022:2022
+      - 10080:10080
     volumes:
-      - /mnt/NAS1_DATA/files/www/:/mnt
+      - /mnt/NAS1/@data/share:/srv/share
+      - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json

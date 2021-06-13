@@ -1,0 +1,262 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "status": 1,
+      "username": "***REMOVED***",
+      "expiration_date": 0,
+      "password": "***REMOVED***",
+      "home_dir": "/srv/share/files/***REMOVED***",
+      "virtual_folders": [
+        {
+          "id": 1,
+          "name": "photos",
+          "mapped_path": "/srv/share/photos",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/photos",
+          "quota_size": -1,
+          "quota_files": -1
+        }
+      ],
+      "uid": 0,
+      "gid": 0,
+      "max_sessions": 0,
+      "quota_size": 0,
+      "quota_files": 0,
+      "permissions": {
+        "/": [
+          "*"
+        ]
+      },
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "upload_bandwidth": 0,
+      "download_bandwidth": 0,
+      "last_login": 0,
+      "filters": {},
+      "filesystem": {
+        "provider": 0,
+        "s3config": {
+          "access_secret": {}
+        },
+        "gcsconfig": {
+          "credentials": {}
+        },
+        "azblobconfig": {
+          "account_key": {}
+        },
+        "cryptconfig": {
+          "passphrase": {}
+        },
+        "sftpconfig": {
+          "password": {},
+          "private_key": {}
+        }
+      }
+    },
+    {
+      "id": 2,
+      "status": 1,
+      "username": "***REMOVED***",
+      "expiration_date": 0,
+      "password": "***REMOVED***",
+      "home_dir": "/srv/share/files/***REMOVED***",
+      "virtual_folders": [
+        {
+          "id": 1,
+          "name": "photos",
+          "mapped_path": "/srv/share/photos",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/photos",
+          "quota_size": -1,
+          "quota_files": -1
+        }
+      ],
+      "uid": 0,
+      "gid": 0,
+      "max_sessions": 0,
+      "quota_size": 0,
+      "quota_files": 0,
+      "permissions": {
+        "/": [
+          "*"
+        ]
+      },
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "upload_bandwidth": 0,
+      "download_bandwidth": 0,
+      "last_login": 0,
+      "filters": {},
+      "filesystem": {
+        "provider": 0,
+        "s3config": {
+          "access_secret": {}
+        },
+        "gcsconfig": {
+          "credentials": {}
+        },
+        "azblobconfig": {
+          "account_key": {}
+        },
+        "cryptconfig": {
+          "passphrase": {}
+        },
+        "sftpconfig": {
+          "password": {},
+          "private_key": {}
+        }
+      }
+    },
+    {
+      "id": 3,
+      "status": 1,
+      "username": "***REMOVED***",
+      "expiration_date": 0,
+      "password": "***REMOVED***",
+      "home_dir": "/srv/share/files/***REMOVED***",
+      "virtual_folders": [
+        {
+          "id": 1,
+          "name": "photos",
+          "mapped_path": "/srv/share/photos",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/photos",
+          "quota_size": -1,
+          "quota_files": -1
+        }
+      ],
+      "uid": 0,
+      "gid": 0,
+      "max_sessions": 0,
+      "quota_size": 0,
+      "quota_files": 0,
+      "permissions": {
+        "/": [
+          "*"
+        ]
+      },
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "upload_bandwidth": 0,
+      "download_bandwidth": 0,
+      "last_login": 0,
+      "filters": {},
+      "filesystem": {
+        "provider": 0,
+        "s3config": {
+          "access_secret": {}
+        },
+        "gcsconfig": {
+          "credentials": {}
+        },
+        "azblobconfig": {
+          "account_key": {}
+        },
+        "cryptconfig": {
+          "passphrase": {}
+        },
+        "sftpconfig": {
+          "password": {},
+          "private_key": {}
+        }
+      }
+    },
+    {
+      "id": 4,
+      "status": 1,
+      "username": "***REMOVED***",
+      "expiration_date": 0,
+      "password": "***REMOVED***",
+      "home_dir": "/srv/share/files/***REMOVED***",
+      "virtual_folders": [
+        {
+          "id": 1,
+          "name": "photos",
+          "mapped_path": "/srv/share/photos",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/photos",
+          "quota_size": -1,
+          "quota_files": -1
+        }
+      ],
+      "uid": 0,
+      "gid": 0,
+      "max_sessions": 0,
+      "quota_size": 0,
+      "quota_files": 0,
+      "permissions": {
+        "/": [
+          "*"
+        ]
+      },
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "upload_bandwidth": 0,
+      "download_bandwidth": 0,
+      "last_login": 0,
+      "filters": {},
+      "filesystem": {
+        "provider": 0,
+        "s3config": {
+          "access_secret": {}
+        },
+        "gcsconfig": {
+          "credentials": {}
+        },
+        "azblobconfig": {
+          "account_key": {}
+        },
+        "cryptconfig": {
+          "passphrase": {}
+        },
+        "sftpconfig": {
+          "password": {},
+          "private_key": {}
+        }
+      }
+    }
+  ],
+  "folders": [
+    {
+      "id": 1,
+      "name": "photos",
+      "mapped_path": "/srv/share/photos",
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "users": [
+        "***REMOVED***",
+        "***REMOVED***",
+        "***REMOVED***",
+        "***REMOVED***"
+      ]
+    }
+  ],
+  "admins": [
+    {
+      "id": 1,
+      "status": 1,
+      "username": "***REMOVED***",
+      "password": "***REMOVED***",
+      "email": "",
+      "permissions": [
+        "*"
+      ],
+      "filters": {}
+    }
+  ],
+  "version": 6
+}
