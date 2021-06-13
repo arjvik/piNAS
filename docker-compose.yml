@@ -4,13 +4,13 @@ services:
   sftpgo:
     image: drakkan/sftpgo:v2.0.4-alpine-slim
     environment:
-      - SFTPGO_WEBDAVD__BINDINGS__0__PORT=10080
-      - SFTPGO_WEBDAVD__DATA_PROVIDER__DRIVER=memory
+      - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
+      - SFTPGO_DATA_PROVIDER__DRIVER=memory
       - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
     ports:
       - 8080:8080
       - 2222:2022
-      - 80:10080
+      - 80:8000
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json
