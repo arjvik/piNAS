@@ -9,8 +9,8 @@ services:
       - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
     ports:
       - 8080:8080
-      - 2022:2022
-      - 10080:10080
+      - 2222:2022
+      - 80:10080
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json
