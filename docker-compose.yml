@@ -3,6 +3,7 @@ version: "3.9"
 services:
   sftpgo:
     image: drakkan/sftpgo:v2.0.4-alpine-slim
+    restart: always
     environment:
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
@@ -14,3 +15,8 @@ services:
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json
+  iperf3:
+    build: ./iperf3
+    restart: always
+    ports:
+      - 5201:5201
