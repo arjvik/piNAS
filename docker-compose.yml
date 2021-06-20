@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   sftpgo:
-    image: drakkan/sftpgo:v2.0.4-alpine-slim
+    image: drakkan/sftpgo:v2-alpine-slim
     restart: always
     environment:
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
