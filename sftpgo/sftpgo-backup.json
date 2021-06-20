@@ -16,8 +16,8 @@
           "used_quota_files": 0,
           "last_quota_update": 0,
           "virtual_path": "/photos",
-          "quota_size": -1,
-          "quota_files": -1
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -73,8 +73,8 @@
           "used_quota_files": 0,
           "last_quota_update": 0,
           "virtual_path": "/photos",
-          "quota_size": -1,
-          "quota_files": -1
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -130,8 +130,8 @@
           "used_quota_files": 0,
           "last_quota_update": 0,
           "virtual_path": "/photos",
-          "quota_size": -1,
-          "quota_files": -1
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -187,8 +187,8 @@
           "used_quota_files": 0,
           "last_quota_update": 0,
           "virtual_path": "/photos",
-          "quota_size": -1,
-          "quota_files": -1
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -245,18 +245,6 @@
       ]
     }
   ],
-  "admins": [
-    {
-      "id": 1,
-      "status": 1,
-      "username": "***REMOVED***",
-      "password": "***REMOVED***",
-      "email": "",
-      "permissions": [
-        "*"
-      ],
-      "filters": {}
-    }
-  ],
+  "admins": [],
   "version": 6
 }

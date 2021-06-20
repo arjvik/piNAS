@@ -7,6 +7,7 @@ services:
     environment:
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
+      - SFTPGO_DATA_PROVIDER__CREATE_DEFAULT_ADMIN=true
       - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
     ports:
       - 2222:2022
