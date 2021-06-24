@@ -18,6 +18,17 @@
           "virtual_path": "/photos",
           "quota_size": 0,
           "quota_files": 0
+        },
+        {
+          "id": 2,
+          "name": "scans",
+          "mapped_path": "/srv/share/scans",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/scans",
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -73,6 +84,17 @@
           "used_quota_files": 0,
           "last_quota_update": 0,
           "virtual_path": "/photos",
+          "quota_size": 0,
+          "quota_files": 0
+        },
+        {
+          "id": 2,
+          "name": "scans",
+          "mapped_path": "/srv/share/scans",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/scans",
           "quota_size": 0,
           "quota_files": 0
         }
@@ -132,6 +154,17 @@
           "virtual_path": "/photos",
           "quota_size": 0,
           "quota_files": 0
+        },
+        {
+          "id": 2,
+          "name": "scans",
+          "mapped_path": "/srv/share/scans",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/scans",
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -189,6 +222,17 @@
           "virtual_path": "/photos",
           "quota_size": 0,
           "quota_files": 0
+        },
+        {
+          "id": 2,
+          "name": "scans",
+          "mapped_path": "/srv/share/scans",
+          "used_quota_size": 0,
+          "used_quota_files": 0,
+          "last_quota_update": 0,
+          "virtual_path": "/scans",
+          "quota_size": 0,
+          "quota_files": 0
         }
       ],
       "uid": 0,
@@ -234,6 +278,20 @@
       "id": 1,
       "name": "photos",
       "mapped_path": "/srv/share/photos",
+      "used_quota_size": 0,
+      "used_quota_files": 0,
+      "last_quota_update": 0,
+      "users": [
+        "***REMOVED***",
+        "***REMOVED***",
+        "***REMOVED***",
+        "***REMOVED***"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "scans",
+      "mapped_path": "/srv/share/scans",
       "used_quota_size": 0,
       "used_quota_files": 0,
       "last_quota_update": 0,
