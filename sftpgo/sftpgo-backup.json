@@ -15,7 +15,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/photos",
+          "virtual_path": "/shared/photos",
           "quota_size": 0,
           "quota_files": 0
         },
@@ -26,7 +26,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/scans",
+          "virtual_path": "/shared/scans",
           "quota_size": 0,
           "quota_files": 0
         }
@@ -83,7 +83,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/photos",
+          "virtual_path": "/shared/photos",
           "quota_size": 0,
           "quota_files": 0
         },
@@ -94,7 +94,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/scans",
+          "virtual_path": "/shared/scans",
           "quota_size": 0,
           "quota_files": 0
         }
@@ -151,7 +151,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/photos",
+          "virtual_path": "/shared/photos",
           "quota_size": 0,
           "quota_files": 0
         },
@@ -162,7 +162,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/scans",
+          "virtual_path": "/shared/scans",
           "quota_size": 0,
           "quota_files": 0
         }
@@ -219,7 +219,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/photos",
+          "virtual_path": "/shared/photos",
           "quota_size": 0,
           "quota_files": 0
         },
@@ -230,7 +230,7 @@
           "used_quota_size": 0,
           "used_quota_files": 0,
           "last_quota_update": 0,
-          "virtual_path": "/scans",
+          "virtual_path": "/shared/scans",
           "quota_size": 0,
           "quota_files": 0
         }
