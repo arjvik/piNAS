@@ -5,6 +5,7 @@ services:
     image: drakkan/sftpgo:v2-alpine-slim
     restart: always
     environment:
+      - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
       - SFTPGO_DATA_PROVIDER__CREATE_DEFAULT_ADMIN=true
@@ -14,7 +15,8 @@ services:
       - 80:8000
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
-      - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json
+      - /mnt/NAS1/@data/config/sftpgo/id_ed25519:/srv/id_ed25519:ro
+      - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json:ro
   samba:
     build: ./samba
     restart: always
@@ -22,7 +24,7 @@ services:
       - 445:445
     volumes:
       - /mnt/NAS1/@data/share/scans:/mnt/scans
-      - ./samba/smb.conf:/etc/samba/smb.conf
+      - ./samba/smb.conf:/etc/samba/smb.conf:ro
   iperf3:
     build: ./iperf3
     restart: always
