@@ -3,7 +3,7 @@ version: "3.9"
 services:
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
-    restart: always
+    restart: unless-stopped
     environment:
       - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
@@ -19,7 +19,7 @@ services:
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json:ro
   samba:
     build: ./samba
-    restart: always
+    restart: unless-stopped
     ports:
       - 445:445
     volumes:
@@ -27,6 +27,6 @@ services:
       - ./samba/smb.conf:/etc/samba/smb.conf:ro
   iperf3:
     build: ./iperf3
-    restart: always
+    restart: unless-stopped
     ports:
       - 5201:5201
