@@ -41,9 +41,10 @@ services:
       - CAMERA=rtsp://***REMOVED***@192.168.1.132/
   ipcamera-nginx:
     image: nginx:alpine
+    restart: unless-stopped
     ports:
       - 9000:9000
     volumes:
-      - ./ipcamera/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ipcamera/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ipcamera/www/:/var/www/:ro
     depends_on: [ipcamera-mjpeg1, ipcamera-mjpeg2]
