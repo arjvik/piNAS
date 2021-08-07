@@ -42,7 +42,8 @@ services:
   ipcamera-nginx:
     image: nginx:alpine
     ports:
-      - 9000:80
+      - 9000:9000
     volumes:
       - ./ipcamera/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ipcamera/www/:/var/www/:ro
     depends_on: [ipcamera-mjpeg1, ipcamera-mjpeg2]
