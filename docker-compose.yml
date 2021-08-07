@@ -30,3 +30,8 @@ services:
     restart: unless-stopped
     ports:
       - 5201:5201
+  ipcamera:
+    build: ./ipcamera
+    restart: unless-stopped
+    environment:
+      - CAMERA=rtsp://***REMOVED***@192.168.1.131/
