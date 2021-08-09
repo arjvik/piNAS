@@ -34,11 +34,11 @@ services:
     build: ./ipcamera
     restart: unless-stopped
     environment:
-      - CAMERA=rtsp://***REMOVED***@192.168.1.131/
+      - CAMERA=rtsp://***REMOVED***@10.42.0.102/
   ipcamera-mjpeg2:
     <<: *ipcamera
     environment:
-      - CAMERA=rtsp://***REMOVED***@192.168.1.132/
+      - CAMERA=rtsp://***REMOVED***@10.42.0.103/
   ipcamera-nginx:
     image: nginx:alpine
     restart: unless-stopped
