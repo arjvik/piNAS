@@ -39,6 +39,10 @@ services:
     <<: *ipcamera
     environment:
       - CAMERA=rtsp://***REMOVED***@192.168.1.132/
+  ipcamera-mjpeg3:
+    <<: *ipcamera
+    environment:
+      - CAMERA=rtsp://***REMOVED***@192.168.1.127/
   ipcamera-nginx:
     image: nginx:alpine
     restart: unless-stopped
