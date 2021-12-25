@@ -8,11 +8,11 @@ services:
       - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
-      - SFTPGO_DATA_PROVIDER__CREATE_DEFAULT_ADMIN=true
       - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
     ports:
       - 2222:2022
       - 80:8000
+      - 8080:8080
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - /mnt/NAS1/@data/config/sftpgo/id_ed25519:/srv/id_ed25519:ro

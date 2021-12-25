@@ -306,6 +306,21 @@
       ]
     }
   ],
-  "admins": [],
+  "admins": [
+    {
+      "id": 1,
+      "status": 1,
+      "username": "***REMOVED***",
+      "password": "***REMOVED***",
+      "permissions": [
+        "*"
+      ],
+      "filters": {
+        "totp_config": {
+          "secret": {}
+        }
+      }
+    }
+  ],
   "version": 6
 }
