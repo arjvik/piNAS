@@ -23,7 +23,7 @@ services:
     ports:
       - 445:445
     volumes:
-      - /mnt/NAS1/@data/share/scans:/mnt/scans
+      - /mnt/NAS1/@data/share/files/shared/scans:/mnt/scans
       - ./samba/smb.conf:/etc/samba/smb.conf:ro
   iperf3:
     build: ./iperf3
