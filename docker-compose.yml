@@ -35,6 +35,8 @@ services:
   ipcamera-mjpeg1: &ipcamera
     build: ./ipcamera
     restart: on-failure
+    env_file:
+      - ./ipcamera/camera-secrets.env
     environment:
       - CAMERA_IP=192.168.1.131
   ipcamera-mjpeg2:
