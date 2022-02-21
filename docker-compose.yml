@@ -5,15 +5,17 @@ services:
     image: traefik
     command:
       - "--api.dashboard=true"
-      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
     ports:
       - 80:80
-      - 8080:8080
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`) || PathPrefix(`/api`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
@@ -36,10 +38,10 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sftpgoweb.rule=PathPrefix(`/sftpgo`)"
       - "traefik.http.services.sftpgoweb.loadbalancer.server.port=8080"
-      - "traefik.http.routers.sftpgoweb.service=sftpgoweb"
+      - "traefik.http.routers.sftpgoweb.service=sftpgoweb@docker"
       - "traefik.http.routers.sftpgodav.rule=PathPrefix(`/dav`)"
       - "traefik.http.services.sftpgodav.loadbalancer.server.port=8000"
-      - "traefik.http.routers.sftpgodav.service=sftpgodav"
+      - "traefik.http.routers.sftpgodav.service=sftpgodav@docker"
   samba:
     build: ./samba
     restart: on-failure
