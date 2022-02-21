@@ -3,13 +3,13 @@
     {
       "id": 1,
       "status": 1,
-      "username": "***REMOVED***",
+      "username": "$USER1_USERNAME",
       "expiration_date": 0,
-      "password": "***REMOVED***",
+      "password": "$USER1_PASSWORD",
       "public_keys": [
-        "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGs+/5XcvtDQhzyucWIB6G7Ux9ONhKLqDFeA2wrzs0ZbfkMF+l/DGRZPcKToUWnIOPWmLaQbFfCrmbtW9DrGdHWcAEM4XccYgz6jpZCJMTY80JDZ07svZGJcGYdikFfHQ1iaZfoPWHLtcM7THUJVEVRep+wIWo1iXGPJOBt6HQ7/lvlCA== arjvik@arjvik-spectre"
+        "$USER1_SSH_KEYS"
       ],
-      "home_dir": "/srv/share/files/***REMOVED***",
+      "home_dir": "/srv/share/files/$USER1_USERNAME",
       "virtual_folders": [
         {
           "id": 1,
@@ -63,10 +63,10 @@
     {
       "id": 2,
       "status": 1,
-      "username": "***REMOVED***",
+      "username": "$USER2_USERNAME",
       "expiration_date": 0,
-      "password": "***REMOVED***",
-      "home_dir": "/srv/share/files/***REMOVED***",
+      "password": "$USER2_PASSWORD",
+      "home_dir": "/srv/share/files/$USER2_USERNAME",
       "virtual_folders": [
         {
           "id": 1,
@@ -120,10 +120,10 @@
     {
       "id": 3,
       "status": 1,
-      "username": "***REMOVED***",
+      "username": "$USER3_USERNAME",
       "expiration_date": 0,
-      "password": "***REMOVED***",
-      "home_dir": "/srv/share/files/***REMOVED***",
+      "password": "$USER3_PASSWORD",
+      "home_dir": "/srv/share/files/$USER3_USERNAME",
       "virtual_folders": [
         {
           "id": 1,
@@ -177,10 +177,10 @@
     {
       "id": 4,
       "status": 1,
-      "username": "***REMOVED***",
+      "username": "$USER4_USERNAME",
       "expiration_date": 0,
-      "password": "***REMOVED***",
-      "home_dir": "/srv/share/files/***REMOVED***",
+      "password": "$USER4_PASSWORD",
+      "home_dir": "/srv/share/files/$USER4_USERNAME",
       "virtual_folders": [
         {
           "id": 1,
@@ -241,10 +241,10 @@
       "used_quota_files": 0,
       "last_quota_update": 0,
       "users": [
-        "***REMOVED***",
-        "***REMOVED***",
-        "***REMOVED***",
-        "***REMOVED***"
+        "$USER1_USERNAME",
+        "$USER2_USERNAME",
+        "$USER3_USERNAME",
+        "$USER4_USERNAME"
       ]
     }
   ],
@@ -252,8 +252,8 @@
     {
       "id": 1,
       "status": 1,
-      "username": "***REMOVED***",
-      "password": "***REMOVED***",
+      "username": "$ADMIN_USERNAME",
+      "password": "$ADMIN_PASSWORD",
       "permissions": [
         "*"
       ],

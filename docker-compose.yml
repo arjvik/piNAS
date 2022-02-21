@@ -3,12 +3,13 @@ version: "3.9"
 services:
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
+    command: sh -c "sed -f <(busybox sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env) /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
     restart: on-failure
     environment:
       - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
-      - SFTPGO_LOADDATA_FROM=/srv/sftpgo.json
+      - SFTPGO_LOADDATA_FROM=/tmp/sftpgo.json
     ports:
       - 2222:2022
       - 80:8000
@@ -16,7 +17,8 @@ services:
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - /mnt/NAS1/@data/config/sftpgo/id_ed25519:/srv/id_ed25519:ro
-      - ./sftpgo/sftpgo-backup.json:/srv/sftpgo.json:ro
+      - ./sftpgo/sftpgo-backup.json:/srv/sftpgo-template.json:ro
+      - ./sftpgo/sftpgo-secrets.env:/srv/sftpgo-secrets.env:ro
   samba:
     build: ./samba
     restart: on-failure
