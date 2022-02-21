@@ -3,7 +3,7 @@ version: "3.9"
 services:
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
-    command: sh -c "sed -f <(busybox sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env) /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
+    command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
     restart: on-failure
     environment:
       - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
