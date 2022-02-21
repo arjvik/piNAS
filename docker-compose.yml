@@ -1,6 +1,19 @@
 version: "3.9"
 
 services:
+  traefik:
+    image: traefik
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
@@ -8,17 +21,25 @@ services:
     environment:
       - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
       - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
+      - SFTPGO_WEBDAVD__BINDINGS__0__PREFIX=/dav
+      - SFTPGO_HTTPD__WEB_ROOT=/sftpgo
       - SFTPGO_DATA_PROVIDER__DRIVER=memory
       - SFTPGO_LOADDATA_FROM=/tmp/sftpgo.json
     ports:
       - 2222:2022
-      - 80:8000
-      - 8080:8080
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - /mnt/NAS1/@data/config/sftpgo/id_ed25519:/srv/id_ed25519:ro
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo-template.json:ro
       - ./sftpgo/sftpgo-secrets.env:/srv/sftpgo-secrets.env:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sftpgoweb.rule=PathPrefix(`/sftpgo`)"
+      - "traefik.http.services.sftpgoweb.loadbalancer.server.port=8080"
+      - "traefik.http.routers.sftpgoweb.service=sftpgoweb"
+      - "traefik.http.routers.sftpgodav.rule=PathPrefix(`/dav`)"
+      - "traefik.http.services.sftpgodav.loadbalancer.server.port=8000"
+      - "traefik.http.routers.sftpgodav.service=sftpgodav"
   samba:
     build: ./samba
     restart: on-failure
