@@ -11,11 +11,11 @@ services:
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls.certresolver=leresolver
       - --entrypoints.websecure.http.tls.domains[0].main=zob.one
+      - --log.level=info
       - --accesslog=true
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
       - --certificatesresolvers.leresolver.acme.dnschallenge.provider=cloudflare
       - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
-      - --certificatesresolvers.leresolver.acme.storage=/tmp/acme.json
     ports:
       - 80:80
       - 443:443
@@ -29,7 +29,7 @@ services:
       traefik.http.routers.dashboard.middlewares: dashboard-add-trailing-slash
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
-      traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: false
+      traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
     env_file:
       - ./traefik/letsencrypt-secrets.env
   sftpgo:
