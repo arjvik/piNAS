@@ -14,25 +14,25 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=PathPrefix(`/dashboard`) || PathPrefix(`/api`)
-      - traefik.http.routers.dashboard.service=api@internal
-      - traefik.http.routers.dashboard.entrypoints=web
-      - traefik.http.routers.dashboard.middlewares=dashboard-add-trailing-slash
-      - traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex=(^.*\/dashboard$$)
-      - traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement=$$1/
-      - traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent=false
+      traefik.enable: true
+      traefik.http.routers.dashboard.rule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+      traefik.http.routers.dashboard.service: api@internal
+      traefik.http.routers.dashboard.entrypoints: web
+      traefik.http.routers.dashboard.middlewares: dashboard-add-trailing-slash
+      traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
+      traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
+      traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: false
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
     restart: on-failure
     environment:
-      - SFTPGO_SFTPD__HOST_KEYS=/srv/id_ed25519
-      - SFTPGO_WEBDAVD__BINDINGS__0__PORT=8000
-      - SFTPGO_WEBDAVD__BINDINGS__0__PREFIX=/dav
-      - SFTPGO_HTTPD__WEB_ROOT=/sftpgo
-      - SFTPGO_DATA_PROVIDER__DRIVER=memory
-      - SFTPGO_LOADDATA_FROM=/tmp/sftpgo.json
+      SFTPGO_SFTPD__HOST_KEYS: /srv/id_ed25519
+      SFTPGO_WEBDAVD__BINDINGS__0__PORT: 8000
+      SFTPGO_WEBDAVD__BINDINGS__0__PREFIX: /dav
+      SFTPGO_HTTPD__WEB_ROOT: /sftpgo
+      SFTPGO_DATA_PROVIDER__DRIVER: memory
+      SFTPGO_LOADDATA_FROM: /tmp/sftpgo.json
     ports:
       - 2222:2022
     volumes:
@@ -41,15 +41,15 @@ services:
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo-template.json:ro
       - ./sftpgo/sftpgo-secrets.env:/srv/sftpgo-secrets.env:ro
     labels:
-      - traefik.enable=true
-      - traefik.http.services.sftpgoweb.loadbalancer.server.port=8080
-      - traefik.http.routers.sftpgoweb.rule=PathPrefix(`/sftpgo`)
-      - traefik.http.routers.sftpgoweb.service=sftpgoweb@docker
-      - traefik.http.routers.sftpgoweb.entrypoints=web
-      - traefik.http.services.sftpgodav.loadbalancer.server.port=8000
-      - traefik.http.routers.sftpgodav.rule=PathPrefix(`/dav`)
-      - traefik.http.routers.sftpgodav.service=sftpgodav@docker
-      - traefik.http.routers.sftpgodav.entrypoints=web
+      traefik.enable: true
+      traefik.http.services.sftpgoweb.loadbalancer.server.port: 8080
+      traefik.http.routers.sftpgoweb.rule: PathPrefix(`/sftpgo`)
+      traefik.http.routers.sftpgoweb.service: sftpgoweb@docker
+      traefik.http.routers.sftpgoweb.entrypoints: web
+      traefik.http.services.sftpgodav.loadbalancer.server.port: 8000
+      traefik.http.routers.sftpgodav.rule: PathPrefix(`/dav`)
+      traefik.http.routers.sftpgodav.service: sftpgodav@docker
+      traefik.http.routers.sftpgodav.entrypoints: web
   samba:
     build: ./samba
     restart: on-failure
@@ -69,15 +69,15 @@ services:
     env_file:
       - ./ipcamera/camera-secrets.env
     environment:
-      - CAMERA_IP=192.168.1.131
+      CAMERA_IP: 192.168.1.131
   ipcamera-mjpeg2:
     <<: *ipcamera
     environment:
-      - CAMERA_IP=192.168.1.132
+      CAMERA_IP: 192.168.1.132
   ipcamera-mjpeg3:
     <<: *ipcamera
     environment:
-      - CAMERA_IP=192.168.1.127
+      CAMERA_IP: 192.168.1.127
   ipcamera-nginx:
     image: nginx:alpine
     restart: on-failure
@@ -86,4 +86,4 @@ services:
     volumes:
       - ./ipcamera/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ipcamera/www/:/var/www/:ro
-    depends_on: [ipcamera-mjpeg1, ipcamera-mjpeg2]
+    depends_on: [ipcamera-mjpeg1, ipcamera-mjpeg2, ipcamera-mjpeg3]
