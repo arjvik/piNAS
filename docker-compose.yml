@@ -18,7 +18,6 @@ services:
       - --accesslog=true
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
       - --certificatesresolvers.leresolver.acme.dnschallenge.provider=cloudflare
-      - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
     ports:
       - 80:80
       - 443:443
