@@ -8,9 +8,6 @@ services:
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
-      - --entrypoints.web.http.redirections.entrypoint.to=websecure
-      - --entrypoints.web.http.redirections.entrypoint.scheme=https
-      - --entrypoints.web.http.redirections.entrypoint.permanent=true
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls.certresolver=leresolver
       - --entrypoints.websecure.http.tls.domains[0].main=zob.one
@@ -29,7 +26,7 @@ services:
       traefik.enable: true
       traefik.http.routers.dashboard.rule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
       traefik.http.routers.dashboard.service: api@internal
-      traefik.http.routers.dashboard.entrypoints: websecure
+      traefik.http.routers.dashboard.entrypoints: web,websecure
       traefik.http.routers.dashboard.middlewares: dashboard-add-trailing-slash
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
@@ -59,11 +56,11 @@ services:
       traefik.http.services.sftpgoweb.loadbalancer.server.port: 8080
       traefik.http.routers.sftpgoweb.rule: PathPrefix(`/sftpgo`)
       traefik.http.routers.sftpgoweb.service: sftpgoweb@docker
-      traefik.http.routers.sftpgoweb.entrypoints: websecure
+      traefik.http.routers.sftpgoweb.entrypoints: web,websecure
       traefik.http.services.sftpgodav.loadbalancer.server.port: 8000
       traefik.http.routers.sftpgodav.rule: PathPrefix(`/dav`)
       traefik.http.routers.sftpgodav.service: sftpgodav@docker
-      traefik.http.routers.sftpgodav.entrypoints: websecure
+      traefik.http.routers.sftpgodav.entrypoints: web,websecure
   samba:
     build: ./samba
     restart: on-failure
