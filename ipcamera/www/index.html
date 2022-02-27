@@ -4,18 +4,21 @@
 		<style>
 			body {
 				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
 			}
-			.flex-container {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-			}
-			.flex-container>img {
-				width: calc(min(100vw, 100%));
+			div {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="flex-container">
+		<div>
 			<img height=50% src="/mjpeg1" />
 			<img height=50% src="/mjpeg2" />
 			<img height=50% src="/mjpeg3" />
