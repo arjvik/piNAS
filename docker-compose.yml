@@ -64,6 +64,16 @@ services:
       traefik.http.routers.sftpgodav.rule: PathPrefix(`/dav`)
       traefik.http.routers.sftpgodav.service: sftpgodav@docker
       traefik.http.routers.sftpgodav.entrypoints: websecure
+  index:
+    image: fnichol/uhttpd
+    volumes:
+      - ./index/index.html:/www/index.html:ro
+    labels:
+      traefik.enable: true
+      traefik.http.services.index.loadbalancer.server.port: 80
+      traefik.http.routers.index.rule: PathPrefix(`/`)
+      traefik.http.routers.index.service: index@docker
+      traefik.http.routers.index.entrypoints: websecure
   samba:
     build: ./samba
     restart: on-failure
