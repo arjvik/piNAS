@@ -56,14 +56,14 @@ services:
       - ./sftpgo/sftpgo-secrets.env:/srv/sftpgo-secrets.env:ro
     labels:
       traefik.enable: true
-      traefik.http.services.sftpgoweb.loadbalancer.server.port: 8080
-      traefik.http.routers.sftpgoweb.rule: PathPrefix(`/sftpgo`)
-      traefik.http.routers.sftpgoweb.service: sftpgoweb@docker
-      traefik.http.routers.sftpgoweb.entrypoints: websecure
-      traefik.http.services.sftpgodav.loadbalancer.server.port: 8000
-      traefik.http.routers.sftpgodav.rule: PathPrefix(`/dav`)
-      traefik.http.routers.sftpgodav.service: sftpgodav@docker
-      traefik.http.routers.sftpgodav.entrypoints: websecure
+      traefik.http.services.sftpgo-web.loadbalancer.server.port: 8080
+      traefik.http.routers.sftpgo-web.rule: PathPrefix(`/sftpgo`)
+      traefik.http.routers.sftpgo-web.service: sftpgo-web@docker
+      traefik.http.routers.sftpgo-web.entrypoints: websecure
+      traefik.http.services.sftpgo-dav.loadbalancer.server.port: 8000
+      traefik.http.routers.sftpgo-dav.rule: PathPrefix(`/dav`)
+      traefik.http.routers.sftpgo-dav.service: sftpgo-dav@docker
+      traefik.http.routers.sftpgo-dav.entrypoints: websecure
   index:
     image: fnichol/uhttpd
     volumes:
