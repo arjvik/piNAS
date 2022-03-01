@@ -69,6 +69,7 @@ services:
     command: -enable-logging
     volumes:
       - ./index/index.html:/srv/http/index.html:ro
+      - ./.git/refs/heads/master:/srv/http/commit.txt:ro
     labels:
       traefik.enable: true
       traefik.http.services.index.loadbalancer.server.port: 8043
