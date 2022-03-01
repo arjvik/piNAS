@@ -65,12 +65,13 @@ services:
       traefik.http.routers.sftpgo-dav.service: sftpgo-dav@docker
       traefik.http.routers.sftpgo-dav.entrypoints: websecure
   index:
-    image: fnichol/uhttpd
+    image: pierrezemb/gostatic
+    command: -enable-logging
     volumes:
-      - ./index/index.html:/www/index.html:ro
+      - ./index/index.html:/srv/http/index.html:ro
     labels:
       traefik.enable: true
-      traefik.http.services.index.loadbalancer.server.port: 80
+      traefik.http.services.index.loadbalancer.server.port: 8043
       traefik.http.routers.index.rule: PathPrefix(`/`)
       traefik.http.routers.index.service: index@docker
       traefik.http.routers.index.entrypoints: websecure
