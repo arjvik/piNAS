@@ -38,7 +38,7 @@ services:
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
-    command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
+    command: sh -c "env | sed -Ene 's/^SFTPGOCUSTOM_(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/p' | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
     restart: on-failure
     environment:
       SFTPGO_SFTPD__HOST_KEYS: /srv/id_ed25519
@@ -47,13 +47,23 @@ services:
       SFTPGO_HTTPD__WEB_ROOT: /sftpgo
       SFTPGO_DATA_PROVIDER__DRIVER: memory
       SFTPGO_LOADDATA_FROM: /tmp/sftpgo.json
+      SFTPGOCUSTOM_USER1_USERNAME: ${SFTPGO_USER1_USERNAME}
+      SFTPGOCUSTOM_USER1_PASSWORD: ${SFTPGO_USER1_PASSWORD}
+      SFTPGOCUSTOM_USER1_SSH_KEYS: ${SFTPGO_USER1_SSH_KEYS}
+      SFTPGOCUSTOM_USER2_USERNAME: ${SFTPGO_USER2_USERNAME}
+      SFTPGOCUSTOM_USER2_PASSWORD: ${SFTPGO_USER2_PASSWORD}
+      SFTPGOCUSTOM_USER3_USERNAME: ${SFTPGO_USER3_USERNAME}
+      SFTPGOCUSTOM_USER3_PASSWORD: ${SFTPGO_USER3_PASSWORD}
+      SFTPGOCUSTOM_USER4_USERNAME: ${SFTPGO_USER4_USERNAME}
+      SFTPGOCUSTOM_USER4_PASSWORD: ${SFTPGO_USER4_PASSWORD}
+      SFTPGOCUSTOM_ADMIN_USERNAME: ${SFTPGO_ADMIN_USERNAME}
+      SFTPGOCUSTOM_ADMIN_PASSWORD: ${SFTPGO_ADMIN_PASSWORD}
     ports:
       - 2222:2022
     volumes:
       - /mnt/NAS1/@data/share:/srv/share
       - /mnt/NAS1/@data/config/sftpgo/id_ed25519:/srv/id_ed25519:ro
       - ./sftpgo/sftpgo-backup.json:/srv/sftpgo-template.json:ro
-      - ./sftpgo/sftpgo-secrets.env:/srv/sftpgo-secrets.env:ro
     labels:
       traefik.enable: true
       traefik.http.services.sftpgo-web.loadbalancer.server.port: 8080
