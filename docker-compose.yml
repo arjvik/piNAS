@@ -19,6 +19,8 @@ services:
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
       - --certificatesresolvers.leresolver.acme.dnschallenge.provider=cloudflare
       - --certificatesresolvers.leresolver.acme.storage=/srv/acme.json
+    environment:
+      CLOUDFLARE_DNS_API_TOKEN: ${TRAEFIK_CLOUDFLARE_DNS_API_TOKEN}
     ports:
       - 80:80
       - 443:443
@@ -34,8 +36,6 @@ services:
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
-    env_file:
-      - ./traefik/letsencrypt-secrets.env
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "sed -Ee 's/^(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/' /srv/sftpgo-secrets.env | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
