@@ -8,7 +8,7 @@ append-body: <script>fetch('/commit.txt').then((response) => response.text()).th
 
 Files: [zob.one/sftpgo](/sftpgo)
 
-Camera: *under construction*
+Camera: [zob.one/cameras](/cameras)
 
 Connect to WebDAV share on Windows:
 

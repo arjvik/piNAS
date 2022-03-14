@@ -81,12 +81,12 @@ services:
     command: -enable-logging
     volumes:
       - ./index/index.html:/srv/http/index.html:ro
+      - ./index/cameras.html:/srv/http/cameras:ro
       - ./.git/refs/heads/master:/srv/http/commit.txt:ro
     labels:
       traefik.enable: true
       traefik.http.services.index.loadbalancer.server.port: 8043
       traefik.http.routers.index.rule: PathPrefix(`/`)
-      traefik.http.routers.index.service: index@docker
       traefik.http.routers.index.entrypoints: websecure
   samba:
     build: ./samba
@@ -101,26 +101,37 @@ services:
     restart: on-failure
     ports:
       - 5201:5201
-  ipcamera-mjpeg1: &ipcamera
+  ipcamera-mjpeg1:
     build: ./ipcamera
     restart: on-failure
     environment:
-      BASIC_AUTH: ${IPCAMERA_BASIC_AUTH:?}
-      CAMERA_IP: 192.168.1.131
+      CAMERA_FEED: ${IPCAMERA_FEED_1:?}
+    labels:
+      traefik.enable: true
+      traefik.http.services.ipcamera-mjpeg1.loadbalancer.server.port: 9000
+      traefik.http.routers.ipcamera-mjpeg1.rule: PathPrefix(`/mjpeg1`)
+      traefik.http.routers.ipcamera-mjpeg1.entrypoints: websecure
+      traefik.http.routers.ipcamera-mjpeg1.middlewares: mjpeg-strip-prefix
+      traefik.http.middlewares.mjpeg-strip-prefix.stripprefixregex.regex: /mjpeg[0-9]
   ipcamera-mjpeg2:
-    <<: *ipcamera
-    environment:
-      CAMERA_IP: 192.168.1.132
-  ipcamera-mjpeg3:
-    <<: *ipcamera
-    environment:
-      CAMERA_IP: 192.168.1.127
-  ipcamera-nginx:
-    image: nginx:alpine
+    build: ./ipcamera
     restart: on-failure
-    ports:
-      - 9000:9000
-    volumes:
-      - ./ipcamera/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./ipcamera/www/:/var/www/:ro
-    depends_on: [ipcamera-mjpeg1, ipcamera-mjpeg2, ipcamera-mjpeg3]
+    environment:
+      CAMERA_FEED: ${IPCAMERA_FEED_2:?}
+    labels:
+      traefik.enable: true
+      traefik.http.services.ipcamera-mjpeg2.loadbalancer.server.port: 9000
+      traefik.http.routers.ipcamera-mjpeg2.rule: PathPrefix(`/mjpeg2`)
+      traefik.http.routers.ipcamera-mjpeg2.entrypoints: websecure
+      traefik.http.routers.ipcamera-mjpeg2.middlewares: mjpeg-strip-prefix
+  ipcamera-mjpeg3:
+    build: ./ipcamera
+    restart: on-failure
+    environment:
+      CAMERA_FEED: ${IPCAMERA_FEED_3:?}
+    labels:
+      traefik.enable: true
+      traefik.http.services.ipcamera-mjpeg3.loadbalancer.server.port: 9000
+      traefik.http.routers.ipcamera-mjpeg3.rule: PathPrefix(`/mjpeg3`)
+      traefik.http.routers.ipcamera-mjpeg3.entrypoints: websecure
+      traefik.http.routers.ipcamera-mjpeg3.middlewares: mjpeg-strip-prefix
