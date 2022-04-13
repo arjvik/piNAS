@@ -21,6 +21,7 @@ services:
       - --certificatesresolvers.leresolver.acme.storage=/srv/acme.json
       - --certificatesresolvers.leresolver.acme.caserver=${TRAEFIK_ACME_SERVER:-https://acme-v02.api.letsencrypt.org/directory}
       - --pilot.token=${TRAEFIK_PILOT_TOKEN}
+    restart: on-failure
     environment:
       CLOUDFLARE_DNS_API_TOKEN: ${TRAEFIK_CLOUDFLARE_DNS_API_TOKEN:?}
     ports:
@@ -45,6 +46,7 @@ services:
         busybox rm -rf ~/.cloudflared && busybox mkdir ~/.cloudflared &&
         echo "$CLOUDFLARED_CERTIFICATES" | busybox base64 -d > ~/.cloudflared/cert.pem &&
         exec cloudflared --no-autoupdate tunnel ${CLOUDFLARED_TUNNEL_TLS_VERIFY_ARGS:?}
+    restart: on-failure
     environment:
       TUNNEL_HOSTNAME: ${CLOUDFLARED_TUNNEL_HOSTNAME:?}
       TUNNEL_URL: https://${TRAEFIK_HOSTNAME:?}/
@@ -91,6 +93,7 @@ services:
   index:
     image: pierrezemb/gostatic
     command: -enable-logging
+    restart: on-failure
     volumes:
       - ./index/index.html:/srv/http/index.html:ro
       - ./index/cameras.html:/srv/http/cameras:ro
