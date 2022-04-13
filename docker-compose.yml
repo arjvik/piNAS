@@ -13,7 +13,7 @@ services:
       - --entrypoints.web.http.redirections.entrypoint.permanent=true
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls.certresolver=leresolver
-      - --entrypoints.websecure.http.tls.domains[0].main=zob.one
+      - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_HOSTNAME:?}
       - --log.level=info
       - --accesslog=true
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
@@ -44,10 +44,12 @@ services:
       - >
         busybox rm -rf ~/.cloudflared && busybox mkdir ~/.cloudflared &&
         echo "$CLOUDFLARED_CERTIFICATES" | busybox base64 -d > ~/.cloudflared/cert.pem &&
-        exec cloudflared --no-autoupdate tunnel --no-tls-verify --url="https://traefik/ --name=$CLOUDFLARED_TUNNEL_NAME"
+        exec cloudflared --no-autoupdate tunnel ${CLOUDFLARED_TUNNEL_TLS_VERIFY_ARGS:?}
     environment:
-      TUNNEL_HOSTNAME: zob.one
-      TUNNEL_URL: https://traefik/
+      TUNNEL_HOSTNAME: ${CLOUDFLARED_TUNNEL_HOSTNAME:?}
+      TUNNEL_URL: https://${TRAEFIK_HOSTNAME:?}/
+    links:
+      - traefik:${TRAEFIK_HOSTNAME:?}
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "env | sed -Ene 's/^SFTPGOCUSTOM_(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/p' | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
