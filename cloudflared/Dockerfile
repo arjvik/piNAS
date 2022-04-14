@@ -1,4 +1,7 @@
-FROM busybox
+FROM busybox AS tools
 
-RUN if [[ $(uname -m) == "arm64" ]]; then arch="arm64"; elif [[ $(uname -m) == "x86_64" ]]; then arch="amd64"; else false; fi && \
-	wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-$arch -O /usr/sbin/cloudflared
+FROM milgradesec/cloudflared
+COPY --from=tools /bin/busybox /bin/busybox
+
+# Having difficulties with SHELL ["/bin/busybox", "sh", "-c"] ENTRYPOINT []
+ENTRYPOINT ["/bin/busybox", "sh", "-c"]
