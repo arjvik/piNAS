@@ -5,4 +5,4 @@ RUN apk add shadow
 RUN usermod -u 1000 nobody && groupmod -g 1000 nobody
 RUN apk add samba
 
-CMD smbd && sleep 1000d
+CMD ["smbd", "-i"]
