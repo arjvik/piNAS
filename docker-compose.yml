@@ -45,7 +45,7 @@ services:
       - >
         busybox rm -rf ~/.cloudflared && busybox mkdir ~/.cloudflared &&
         echo "$CLOUDFLARED_CERTIFICATES" | busybox base64 -d > ~/.cloudflared/cert.pem &&
-        exec cloudflared --no-autoupdate tunnel ${CLOUDFLARED_TUNNEL_TLS_VERIFY_ARGS:?}
+        exec cloudflared --no-autoupdate tunnel ${CLOUDFLARED_TUNNEL_EXTRA_ARGS?}
     restart: on-failure
     environment:
       TUNNEL_HOSTNAME: ${CLOUDFLARED_TUNNEL_HOSTNAME:?}
