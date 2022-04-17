@@ -31,6 +31,10 @@
       "permissions": {
         "/": [
           "*"
+        ],
+        "/protected": [
+          "list",
+          "upload"
         ]
       },
       "used_quota_size": 0,
@@ -88,6 +92,10 @@
       "permissions": {
         "/": [
           "*"
+        ],
+        "/protected": [
+          "list",
+          "upload"
         ]
       },
       "used_quota_size": 0,
@@ -145,6 +153,10 @@
       "permissions": {
         "/": [
           "*"
+        ],
+        "/protected": [
+          "list",
+          "upload"
         ]
       },
       "used_quota_size": 0,
@@ -202,6 +214,10 @@
       "permissions": {
         "/": [
           "*"
+        ],
+        "/protected": [
+          "list",
+          "upload"
         ]
       },
       "used_quota_size": 0,
