@@ -126,8 +126,9 @@ services:
       traefik.http.services.ipcamera-mjpeg1.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg1.rule: PathPrefix(`/mjpeg1`)
       traefik.http.routers.ipcamera-mjpeg1.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg1.middlewares: mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg1.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
       traefik.http.middlewares.mjpeg-strip-prefix.stripprefixregex.regex: /mjpeg[0-9]
+      traefik.http.middlewares.ipcamera-basicauth.basicauth.users: ${IPCAMERA_HASHED_PASSWORD:?}
   ipcamera-mjpeg2:
     build: ./ipcamera
     restart: on-failure
@@ -138,7 +139,7 @@ services:
       traefik.http.services.ipcamera-mjpeg2.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg2.rule: PathPrefix(`/mjpeg2`)
       traefik.http.routers.ipcamera-mjpeg2.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg2.middlewares: mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg2.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
   ipcamera-mjpeg3:
     build: ./ipcamera
     restart: on-failure
@@ -149,4 +150,4 @@ services:
       traefik.http.services.ipcamera-mjpeg3.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg3.rule: PathPrefix(`/mjpeg3`)
       traefik.http.routers.ipcamera-mjpeg3.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg3.middlewares: mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg3.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
