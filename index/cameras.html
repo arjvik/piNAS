@@ -2,26 +2,31 @@
 <html>
 	<head>
 		<style>
+			/* MJPEG streams have 16:9 ratio */
 			body {
 				margin: 0;
-				padding: 0;
-				height: 100%;
-				overflow: hidden;
 			}
-			div {
-				position: absolute;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				top: 0;
+			.container {
+				height: 100%;
+				width: 100%;
+				display: grid;
+				grid-template-columns: repeat(2, min(88.88vh, 50vw));
+			}
+			@media (max-aspect-ratio: 16/27) {
+				.container {
+					grid-template-columns: 1fr;
+				}
+			}
+			.container > img {
+				width: 100%;
 			}
 		</style>
 	</head>
 	<body>
-		<div>
-			<img height=50% src="/mjpeg1" />
-			<img height=50% src="/mjpeg2" />
-			<img height=50% src="/mjpeg3" />
+		<div class="container">
+			<img src="/mjpeg1" />
+			<img src="/mjpeg2" />
+			<img src="/mjpeg3" />
 		</div>
 	</body>
 </html>
