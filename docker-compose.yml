@@ -39,6 +39,8 @@ services:
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
+      traefik.http.middlewares.ip-whitelist.ipwhitelist.sourceRange: ${TRAEFIK_IP_WHITELIST:?}
+      traefik.http.entrypoints.websecure.http.middlewares: ip-whitelist
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "env | sed -Ene 's/^SFTPGOCUSTOM_(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/p' | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
