@@ -7,7 +7,6 @@ services:
       - --api.dashboard=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
-      - --middlewares.ip-whitelist.ipwhitelist.sourceRange=${TRAEFIK_IP_WHITELIST:?}
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
@@ -15,7 +14,6 @@ services:
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls.certresolver=leresolver
       - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_HOSTNAME:?}
-      - --entrypoints.websecure.http.middlewares=ip-whitelist
       - --log.level=info
       - --accesslog=true
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
@@ -37,10 +35,11 @@ services:
       traefik.http.routers.dashboard.rule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
       traefik.http.routers.dashboard.service: api@internal
       traefik.http.routers.dashboard.entrypoints: websecure
-      traefik.http.routers.dashboard.middlewares: dashboard-add-trailing-slash
+      traefik.http.routers.dashboard.middlewares: ip-whitelist,dashboard-add-trailing-slash
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
+      traefik.http.middlewares.ip-whitelist.ipwhitelist.sourceRange: ${TRAEFIK_IP_WHITELIST:?}
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "env | sed -Ene 's/^SFTPGOCUSTOM_(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/p' | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
@@ -75,10 +74,12 @@ services:
       traefik.http.routers.sftpgo-web.rule: PathPrefix(`/sftpgo`)
       traefik.http.routers.sftpgo-web.service: sftpgo-web@docker
       traefik.http.routers.sftpgo-web.entrypoints: websecure
+      traefik.http.routers.sftpgo-web.middlewares: ip-whitelist
       traefik.http.services.sftpgo-dav.loadbalancer.server.port: 8000
       traefik.http.routers.sftpgo-dav.rule: PathPrefix(`/dav`)
       traefik.http.routers.sftpgo-dav.service: sftpgo-dav@docker
       traefik.http.routers.sftpgo-dav.entrypoints: websecure
+      traefik.http.routers.sftpgo-dav.middlewares: ip-whitelist
   index:
     image: pierrezemb/gostatic
     command: -enable-logging
@@ -92,6 +93,7 @@ services:
       traefik.http.services.index.loadbalancer.server.port: 8043
       traefik.http.routers.index.rule: PathPrefix(`/`)
       traefik.http.routers.index.entrypoints: websecure
+      traefik.http.routers.index.middlewares: ip-whitelist
   samba:
     build: ./samba
     restart: on-failure
@@ -115,7 +117,7 @@ services:
       traefik.http.services.ipcamera-mjpeg1.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg1.rule: PathPrefix(`/mjpeg1`)
       traefik.http.routers.ipcamera-mjpeg1.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg1.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg1.middlewares: ip-whitelist,ipcamera-basicauth,mjpeg-strip-prefix
       traefik.http.middlewares.mjpeg-strip-prefix.stripprefixregex.regex: /mjpeg[0-9]
       traefik.http.middlewares.ipcamera-basicauth.basicauth.users: ${IPCAMERA_HASHED_PASSWORD:?}
   ipcamera-mjpeg2:
@@ -128,7 +130,7 @@ services:
       traefik.http.services.ipcamera-mjpeg2.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg2.rule: PathPrefix(`/mjpeg2`)
       traefik.http.routers.ipcamera-mjpeg2.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg2.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg2.middlewares: ip-whitelist,ipcamera-basicauth,mjpeg-strip-prefix
   ipcamera-mjpeg3:
     build: ./ipcamera
     restart: on-failure
@@ -139,4 +141,4 @@ services:
       traefik.http.services.ipcamera-mjpeg3.loadbalancer.server.port: 9000
       traefik.http.routers.ipcamera-mjpeg3.rule: PathPrefix(`/mjpeg3`)
       traefik.http.routers.ipcamera-mjpeg3.entrypoints: websecure
-      traefik.http.routers.ipcamera-mjpeg3.middlewares: ipcamera-basicauth,mjpeg-strip-prefix
+      traefik.http.routers.ipcamera-mjpeg3.middlewares: ip-whitelist,ipcamera-basicauth,mjpeg-strip-prefix
