@@ -7,6 +7,7 @@ services:
       - --api.dashboard=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
+      - --middlewares.ip-whitelist.ipwhitelist.sourceRange=${TRAEFIK_IP_WHITELIST:?}
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
@@ -14,6 +15,7 @@ services:
       - --entrypoints.websecure.address=:443
       - --entrypoints.websecure.http.tls.certresolver=leresolver
       - --entrypoints.websecure.http.tls.domains[0].main=${TRAEFIK_HOSTNAME:?}
+      - --entrypoints.websecure.http.middlewares=ip-whitelist
       - --log.level=info
       - --accesslog=true
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
@@ -39,8 +41,6 @@ services:
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.regex: (^.*\/dashboard$$)
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.replacement: $$1/
       traefik.http.middlewares.dashboard-add-trailing-slash.redirectregex.permanent: true
-      traefik.http.middlewares.ip-whitelist.ipwhitelist.sourceRange: ${TRAEFIK_IP_WHITELIST:?}
-      traefik.http.entrypoints.websecure.http.middlewares: ip-whitelist
   sftpgo:
     image: drakkan/sftpgo:v2-alpine-slim
     command: sh -c "env | sed -Ene 's/^SFTPGOCUSTOM_(\\w*)=(.*)$$/s#\\\\$$\\1#\\2#g/p' | sed -f- /srv/sftpgo-template.json > /tmp/sftpgo.json && exec sftpgo serve"
