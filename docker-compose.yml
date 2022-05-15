@@ -108,7 +108,6 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
-      - 8080:80
     environment:
       TZ: ${PIHOLE_TIMEZONE:?}
       WEBPASSWORD: ${PIHOLE_WEBPASSWORD:?}
