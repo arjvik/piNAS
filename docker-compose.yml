@@ -114,6 +114,7 @@ services:
       WEBTHEME: default-dark
       PIHOLE_DNS_: ${PIHOLE_UPSTREAM_DNS:?}
       WEBLOGS_STDOUT: 1
+      DNSMASQ_LISTENING: all
     dns:
       - 127.0.0.1
       - ${PIHOLE_BACKUP_DNS:?}
