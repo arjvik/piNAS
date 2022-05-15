@@ -106,14 +106,14 @@ services:
     image: pihole/pihole
     entrypoint: ["bash", "-c"]
     command:
-      - sed -e 's/hash=$$(HashPassword "$$PASSWORD")/hash="$$PASSWORD"/' -i /opt/pihole/webpage.sh && exec /s6-init bash
+      - sed -e 's/hash=$$(HashPassword "$$PASSWORD")/hash="$$PASSWORD"/' -i /opt/pihole/webpage.sh && exec /s6-init
     restart: on-failure
     ports:
       - 53:53/tcp
       - 53:53/udp
     environment:
       TZ: ${PIHOLE_TIMEZONE:?}
-      WEBPASSWORD: ${PIHOLE_WEBPASSWORD:?}
+      WEBPASSWORD: ${PIHOLE_HASHED_WEBPASSWORD:?}
       WEBTHEME: default-dark
       PIHOLE_DNS_: ${PIHOLE_UPSTREAM_DNS:?}
       WEBLOGS_STDOUT: 1
