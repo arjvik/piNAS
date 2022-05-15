@@ -104,6 +104,9 @@ services:
       - ./samba/smb.conf:/etc/samba/smb.conf:ro
   pihole:
     image: pihole/pihole
+    entrypoint: ["bash", "-c"]
+    command:
+      - sed -e 's/hash=$$(HashPassword "$$PASSWORD")/hash="$$PASSWORD"/' -i /opt/pihole/webpage.sh && exec /s6-init bash
     restart: on-failure
     ports:
       - 53:53/tcp
