@@ -33,11 +33,11 @@ Containerized (using [docker](https://www.docker.com/products/container-runtime)
 
 This docker-compose configuration assumes a [BTRFS](https://btrfs.wiki.kernel.org/index.php/Main_Page) volume mounted at `/mnt/NAS1`, with subvolumes `/@data` and `/@snapshots`.
 
-Suggested `systemd` unit file to launch at startup (user `rpi` has uid 1000 and this Git repository cloned to `~/PiNAS`):
+Suggested `systemd` unit file to launch at startup (user `rpi` has uid 1000 and this Git repository cloned to `~/piNAS`):
 
 ```ini
 [Unit]
-Description=Launch PiNAS Docker services
+Description=Launch piNAS Docker services
 After=network-online.target
 After=docker.service
 
@@ -45,10 +45,14 @@ After=docker.service
 User=rpi
 Group=rpi
 Type=simple
-ExecStart=bash -c 'git -C ~/PiNAS pull && docker container prune -f && exec docker-compose -f ~/PiNAS/docker-compose.yml up'
+ExecStartPre=bash -c 'git -C ~/piNAS pull && docker container prune -f'
+ExecStart=docker compose -f /home/rpi/piNAS/docker-compose.yml up
+ExecStop=docker compose -f /home/rpi/piNAS/docker-compose.yml down
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+When using `netctl` to configure network interfaces on docker host, enable `netctl-wait-online.service` (automatically a dependency of `network-online.target`) to ensure services wait for an established network connection.
 
 A local `.gitignore`d `docker-compose.override.yml` file is used to modify bind-mount paths in order to test configurations on a local machine.
