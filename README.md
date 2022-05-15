@@ -20,11 +20,14 @@ Containerized (using [docker](https://www.docker.com/products/container-runtime)
   - Restricted to small sub-folder of network share
 - [iperf3 Server](https://github.com/esnet/iperf)
   - Allows users to test internal LAN speed and bandwidth
-- Custom IP Camera Monitor
+- [Pi-hole DNS Server](https://pi-hole.net/)
+  - Caches and monitors DNS queries across the network
+  - Redirects external domains to intranet IPs
+
+- [Custom IP Camera Monitor](index/cameras.html)
   - Dashboard interface to view RSTP IP Cameras
   - [MJPEG servers](https://github.com/blueimp/mjpeg-server) use `ffmpeg` to stream camera feed to browser
-
-- Custom Index Page
+- [Custom Index Page](index/index.md)
   - Provides links and instructions for other services
   - Displays piNAS git commit hash
 
