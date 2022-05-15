@@ -102,6 +102,33 @@ services:
     volumes:
       - /mnt/NAS1/@data/share/files/shared/scans:/mnt/scans
       - ./samba/smb.conf:/etc/samba/smb.conf:ro
+  pihole:
+    image: pihole/pihole
+    restart: on-failure
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8080:80
+    environment:
+      TZ: ${PIHOLE_TIMEZONE:?}
+      WEBPASSWORD: ${PIHOLE_WEBPASSWORD:?}
+      WEBTHEME: default-dark
+      PIHOLE_DNS_: ${PIHOLE_UPSTREAM_DNS:?}
+      WEBLOGS_STDOUT: 1
+    dns:
+      - 127.0.0.1
+      - ${PIHOLE_BACKUP_DNS:?}
+    extra_hosts:
+      - ${PIHOLE_HOSTNAME:?}:${PIHOLE_LAN_IPV4:?}
+      - ${PIHOLE_HOSTNAME:?}:${PIHOLE_LAN_IPV6:?}
+    labels:
+      traefik.enable: true
+      traefik.http.services.pihole.loadbalancer.server.port: 80
+      traefik.http.routers.pihole.rule: PathPrefix(`/pihole`)
+      traefik.http.routers.pihole.entrypoints: websecure
+      traefik.http.routers.pihole.middlewares: ip-whitelist,pihole-replace-prefix
+      traefik.http.middlewares.pihole-replace-prefix.replacepathregex.regex: /pihole/(.*)
+      traefik.http.middlewares.pihole-replace-prefix.replacepathregex.replacement: /admin/$$1
   iperf3:
     build: ./iperf3
     restart: on-failure
