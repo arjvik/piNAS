@@ -112,6 +112,8 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
+    volumes:
+      - ./pihole/adlists.list:/etc/pihole/adlists.list:ro
     environment:
       TZ: ${PIHOLE_TIMEZONE:?}
       WEBPASSWORD: ${PIHOLE_HASHED_WEBPASSWORD:?}
