@@ -59,3 +59,12 @@ WantedBy=multi-user.target
 When using `netctl` to configure network interfaces on docker host, enable `netctl-wait-online.service` (automatically a dependency of `network-online.target`) to ensure services wait for an established network connection.
 
 A local `.gitignore`d `docker-compose.override.yml` file is used to modify bind-mount paths in order to test configurations on a local machine.
+
+To enable the included `deploy.post-receive.hook` for Heroku-style Git deployment, run the following commands on the server:
+
+```bash
+$ git config --local receive.denyCurrentBranch warn
+$ ln -sf ../../deploy.post-receive.hook .git/hooks/post-receive
+```
+
+Then, add `rpi@<server>:piNAS` as the `deploy` git remote on the dev machine and run `git push deploy` to deploy the latest commit.
