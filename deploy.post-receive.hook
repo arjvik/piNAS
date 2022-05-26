@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Update worktree to match last pushed commit
-git --git-dir=$GIT_DIR --work-tree=$GIT_DIR/.. reset --hard
+echo "Updating worktree to match last pushed commit"
+git --git-dir="$GIT_DIR" --work-tree="$GIT_DIR/.." reset --hard
 
-# Restart service
+echo "Restarting service"
 sudo systemctl restart piNAS.service
+
+echo "Success!"
