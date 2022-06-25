@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Updating worktree to match last pushed commit"
+git fetch origin master
 git --git-dir="$GIT_DIR" --work-tree="$GIT_DIR/.." reset --hard
 
 echo "Restarting service"
