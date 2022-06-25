@@ -8,3 +8,4 @@ echo "Restarting service"
 sudo systemctl restart piNAS.service
 
 echo "Success!"
+sudo timeout 120s journalctl -fu piNAS.service
