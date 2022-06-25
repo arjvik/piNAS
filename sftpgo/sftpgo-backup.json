@@ -9,60 +9,17 @@
       "public_keys": [
         "$USER1_SSH_KEYS"
       ],
-      "home_dir": "/srv/share/files/$USER1_USERNAME",
-      "virtual_folders": [
-        {
-          "id": 1,
-          "name": "shared",
-          "mapped_path": "/srv/share/files/shared",
-          "used_quota_size": 0,
-          "used_quota_files": 0,
-          "last_quota_update": 0,
-          "virtual_path": "/shared",
-          "quota_size": 0,
-          "quota_files": 0
-        }
-      ],
-      "uid": 0,
-      "gid": 0,
-      "max_sessions": 0,
-      "quota_size": 0,
-      "quota_files": 0,
       "permissions": {
         "/": [
           "*"
-        ],
-        "/protected": [
-          "list",
-          "upload"
         ]
       },
-      "used_quota_size": 0,
-      "used_quota_files": 0,
-      "last_quota_update": 0,
-      "upload_bandwidth": 0,
-      "download_bandwidth": 0,
-      "last_login": 0,
-      "filters": {},
-      "filesystem": {
-        "provider": 0,
-        "s3config": {
-          "access_secret": {}
-        },
-        "gcsconfig": {
-          "credentials": {}
-        },
-        "azblobconfig": {
-          "account_key": {}
-        },
-        "cryptconfig": {
-          "passphrase": {}
-        },
-        "sftpconfig": {
-          "password": {},
-          "private_key": {}
+      "groups": [
+        {
+          "name": "users",
+          "type": 1
         }
-      }
+      ]
     },
     {
       "id": 2,
@@ -70,60 +27,17 @@
       "username": "$USER2_USERNAME",
       "expiration_date": 0,
       "password": "$USER2_PASSWORD",
-      "home_dir": "/srv/share/files/$USER2_USERNAME",
-      "virtual_folders": [
-        {
-          "id": 1,
-          "name": "shared",
-          "mapped_path": "/srv/share/files/shared",
-          "used_quota_size": 0,
-          "used_quota_files": 0,
-          "last_quota_update": 0,
-          "virtual_path": "/shared",
-          "quota_size": 0,
-          "quota_files": 0
-        }
-      ],
-      "uid": 0,
-      "gid": 0,
-      "max_sessions": 0,
-      "quota_size": 0,
-      "quota_files": 0,
       "permissions": {
         "/": [
           "*"
-        ],
-        "/protected": [
-          "list",
-          "upload"
         ]
       },
-      "used_quota_size": 0,
-      "used_quota_files": 0,
-      "last_quota_update": 0,
-      "upload_bandwidth": 0,
-      "download_bandwidth": 0,
-      "last_login": 0,
-      "filters": {},
-      "filesystem": {
-        "provider": 0,
-        "s3config": {
-          "access_secret": {}
-        },
-        "gcsconfig": {
-          "credentials": {}
-        },
-        "azblobconfig": {
-          "account_key": {}
-        },
-        "cryptconfig": {
-          "passphrase": {}
-        },
-        "sftpconfig": {
-          "password": {},
-          "private_key": {}
+      "groups": [
+        {
+          "name": "users",
+          "type": 1
         }
-      }
+      ]
     },
     {
       "id": 3,
@@ -131,60 +45,17 @@
       "username": "$USER3_USERNAME",
       "expiration_date": 0,
       "password": "$USER3_PASSWORD",
-      "home_dir": "/srv/share/files/$USER3_USERNAME",
-      "virtual_folders": [
-        {
-          "id": 1,
-          "name": "shared",
-          "mapped_path": "/srv/share/files/shared",
-          "used_quota_size": 0,
-          "used_quota_files": 0,
-          "last_quota_update": 0,
-          "virtual_path": "/shared",
-          "quota_size": 0,
-          "quota_files": 0
-        }
-      ],
-      "uid": 0,
-      "gid": 0,
-      "max_sessions": 0,
-      "quota_size": 0,
-      "quota_files": 0,
       "permissions": {
         "/": [
           "*"
-        ],
-        "/protected": [
-          "list",
-          "upload"
         ]
       },
-      "used_quota_size": 0,
-      "used_quota_files": 0,
-      "last_quota_update": 0,
-      "upload_bandwidth": 0,
-      "download_bandwidth": 0,
-      "last_login": 0,
-      "filters": {},
-      "filesystem": {
-        "provider": 0,
-        "s3config": {
-          "access_secret": {}
-        },
-        "gcsconfig": {
-          "credentials": {}
-        },
-        "azblobconfig": {
-          "account_key": {}
-        },
-        "cryptconfig": {
-          "passphrase": {}
-        },
-        "sftpconfig": {
-          "password": {},
-          "private_key": {}
+      "groups": [
+        {
+          "name": "users",
+          "type": 1
         }
-      }
+      ]
     },
     {
       "id": 4,
@@ -192,60 +63,49 @@
       "username": "$USER4_USERNAME",
       "expiration_date": 0,
       "password": "$USER4_PASSWORD",
-      "home_dir": "/srv/share/files/$USER4_USERNAME",
+      "permissions": {
+        "/": [
+          "*"
+        ]
+      },
+      "groups": [
+        {
+          "name": "users",
+          "type": 1
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "name": "users",
+      "users": [
+        "$USER1_USERNAME",
+        "$USER2_USERNAME",
+        "$USER3_USERNAME",
+        "$USER4_USERNAME"
+      ],
+      "user_settings": {
+        "home_dir": "/srv/share/files/%username%",
+        "permissions": {
+          "/protected": [
+            "list",
+            "upload"
+          ]
+        }
+      },
       "virtual_folders": [
         {
           "id": 1,
           "name": "shared",
           "mapped_path": "/srv/share/files/shared",
-          "used_quota_size": 0,
-          "used_quota_files": 0,
-          "last_quota_update": 0,
-          "virtual_path": "/shared",
-          "quota_size": 0,
-          "quota_files": 0
+          "groups": [
+            "users"
+          ],
+          "virtual_path": "/shared"
         }
-      ],
-      "uid": 0,
-      "gid": 0,
-      "max_sessions": 0,
-      "quota_size": 0,
-      "quota_files": 0,
-      "permissions": {
-        "/": [
-          "*"
-        ],
-        "/protected": [
-          "list",
-          "upload"
-        ]
-      },
-      "used_quota_size": 0,
-      "used_quota_files": 0,
-      "last_quota_update": 0,
-      "upload_bandwidth": 0,
-      "download_bandwidth": 0,
-      "last_login": 0,
-      "filters": {},
-      "filesystem": {
-        "provider": 0,
-        "s3config": {
-          "access_secret": {}
-        },
-        "gcsconfig": {
-          "credentials": {}
-        },
-        "azblobconfig": {
-          "account_key": {}
-        },
-        "cryptconfig": {
-          "passphrase": {}
-        },
-        "sftpconfig": {
-          "password": {},
-          "private_key": {}
-        }
-      }
+      ]
     }
   ],
   "folders": [
@@ -253,14 +113,8 @@
       "id": 1,
       "name": "shared",
       "mapped_path": "/srv/share/files/shared",
-      "used_quota_size": 0,
-      "used_quota_files": 0,
-      "last_quota_update": 0,
-      "users": [
-        "$USER1_USERNAME",
-        "$USER2_USERNAME",
-        "$USER3_USERNAME",
-        "$USER4_USERNAME"
+      "groups": [
+        "users"
       ]
     }
   ],
@@ -272,13 +126,8 @@
       "password": "$ADMIN_PASSWORD",
       "permissions": [
         "*"
-      ],
-      "filters": {
-        "totp_config": {
-          "secret": {}
-        }
-      }
+      ]
     }
   ],
-  "version": 6
+  "version": 12
 }
