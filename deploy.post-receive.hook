@@ -1,11 +1,15 @@
 #!/bin/bash
 
-echo "Updating worktree to match last pushed commit"
-git fetch origin master
+echo -e "\e[1;31mUpdating worktree and fetching remotes\e[m"
 git --git-dir="$GIT_DIR" --work-tree="$GIT_DIR/.." reset --hard
+git --git-dir="$GIT_DIR" fetch origin master
+while read oldref newref refname; do
+    echo -e "\e[1;32mPushed ${refname##refs/heads/}\t${oldref::7} -> ${newref::7}\e[m"
+done
 
-echo "Restarting service"
+echo -e "\e[1;31mRestarting service\e[m"
 sudo systemctl restart piNAS.service
 
-echo "Success!"
-sudo timeout 120s journalctl -fu piNAS.service
+echo -e "\e[1;31mSuccess!\e[m"
+sudo timeout 20s journalctl -fau piNAS.service
+docker compose -f "$GIT_DIR/../docker-compose.yml" --env-file "$GIT_DIR/../.env" ps -a | GREP_COLORS='ms=1;32' grep '.*' --color=always
