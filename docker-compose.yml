@@ -144,6 +144,17 @@ services:
     restart: on-failure
     ports:
       - 5201:5201
+  apprise:
+    image: caronc/apprise
+    entrypoint: ["bash", "-c"]
+    command:
+      - gunicorn -c /opt/apprise/webapp/gunicorn.conf.py core.wsgi --workers 1 --threads 1 -b $$(ip -o addr show dev eth0 | grep -Po '(?<=inet )[0-9.]+'):80
+    restart: on-failure
+    environment:
+      APPRISE_STATELESS_URLS: ${APPRISE_NOTIFICATION_URLS:?}
+      APPRISE_ALLOW_SERVICES: ntfys
+      APPRISE_STATEFUL_MODE: disabled
+      APPRISE_CONFIG_LOCK: 'yes'
   ipcamera-mjpeg1:
     build: ./ipcamera
     restart: on-failure
