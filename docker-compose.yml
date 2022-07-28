@@ -155,6 +155,10 @@ services:
       APPRISE_ALLOW_SERVICES: ntfys
       APPRISE_STATEFUL_MODE: disabled
       APPRISE_CONFIG_LOCK: 'yes'
+  btrfs-maintenance:
+    build: ./btrfs-maintenance
+    restart: on-failure
+    privileged: true
   ipcamera-mjpeg1:
     build: ./ipcamera
     restart: on-failure
