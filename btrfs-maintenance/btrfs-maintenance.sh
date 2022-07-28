@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-WAIT1=1s
+WAIT1=6h
 WAIT2=7d
 
 function notify() { curl -s -F body="${2-$1}" ${2+-F title="${1}"} apprise/notify; }
