@@ -24,11 +24,12 @@ while true; do
 		notify "BTRFS Scrub succeeded!" "$scrub"
 	fi
 	
-	if fstrim -v /; then
-		notify "SSD Trim successful"
-	else
-		notify "SSD Trim failed!"
-	fi
+	# Can't fstrim inside a directory because all mountpoints are bindmounted
+	#if fstrim -v /; then
+	#	notify "SSD Trim successful"
+	#else
+	#	notify "SSD Trim failed!"
+	#fi
 
 	sleep "$WAIT2"
 done
