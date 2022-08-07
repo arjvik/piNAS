@@ -148,12 +148,12 @@ services:
     image: caronc/apprise
     entrypoint: ["bash", "-c"]
     command:
-      - gunicorn -c /opt/apprise/webapp/gunicorn.conf.py core.wsgi --workers 1 --threads 1 -b $$(ip -o addr show dev eth0 | grep -Po '(?<=inet )[0-9.]+'):80
+      - tr '|' $$'\n' <<<"$$SERVICE_URLS" >/config/main.cfg && exec gunicorn -c /opt/apprise/webapp/gunicorn.conf.py core.wsgi --workers 1 --threads 1 -b $$(ip -o addr show dev eth0 | grep -Po '(?<=inet )[0-9.]+'):80
     restart: on-failure
     environment:
-      APPRISE_STATELESS_URLS: ${APPRISE_NOTIFICATION_URLS:?}
+      SERVICE_URLS: ${APPRISE_NOTIFICATION_URLS:?}
       APPRISE_ALLOW_SERVICES: ntfys
-      APPRISE_STATEFUL_MODE: disabled
+      APPRISE_STATEFUL_MODE: simple
       APPRISE_CONFIG_LOCK: 'yes'
   btrfs-maintenance:
     build: ./btrfs-maintenance
