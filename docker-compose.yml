@@ -106,7 +106,7 @@ services:
     image: pihole/pihole
     entrypoint: ["bash", "-c"]
     command:
-      - sed -e 's/hash=$$(HashPassword "$$PASSWORD")/hash="$$PASSWORD"/' -i /opt/pihole/webpage.sh && rm /etc/pihole/gravity{,_old}.db && exec /s6-init
+      - sed -e 's/hash=$$(HashPassword "$$PASSWORD")/hash="$$PASSWORD"/' -i /opt/pihole/webpage.sh && rm -f /etc/pihole/gravity{,_old}.db && exec /s6-init
     restart: on-failure
     ports:
       - 53:53/tcp
