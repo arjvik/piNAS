@@ -5,7 +5,7 @@ set -euo pipefail
 WAIT1=6h
 WAIT2=7d
 
-function notify() { curl -s -F body="${2-$1}" ${2+-F title="${1}"} ${3+-F tag="${3,,}"} apprise/notify/main; }
+function notify() { echo '$ notify' "$@"; curl -s -F body="${2-$1}" ${2+-F title="${1}"} ${3+-F tag="$(echo "$3" | tr '[:upper:]' '[:lower:]')"} apprise/notify/main; }
 function die() { notify "$@"; exit 1; }
 
 while true; do
@@ -18,7 +18,7 @@ while true; do
 	# Assumes that the relevant BTRFS filesystem is the same one storing the docker directory and subvolumes
 	scrub=$(btrfs scrub start -BR / | tee /dev/stderr) || notify "BTRFS Scrub could not complete!" "$scrub" CRITICAL
 
-	if echo "${scrub}" | grep -q '_errors: [^0]'; then
+	if echo "${scrub}" | grep -q 'errors: [^0]'; then
 		notify "BTRFS Scrub failed!" "$scrub" CRITICAL
 	else
 		notify "BTRFS Scrub succeeded!" "$scrub"
