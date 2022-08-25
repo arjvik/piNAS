@@ -206,3 +206,14 @@ services:
       TUNNEL_URL: ${CLOUDFLARED_SSH_TUNNEL_ENDPOINT:?}
     extra_hosts:
       - docker.host:host-gateway
+  dozzle:
+    image: amir20/dozzle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      traefik.enable: true
+      traefik.http.services.dozzle.loadbalancer.server.port: 8080
+      traefik.http.routers.dozzle.rule: PathPrefix(`/dozzle`)
+      traefik.http.routers.dozzle.entrypoints: websecure
+      traefik.http.routers.dozzle.middlewares: ip-whitelist,basicauth,dozzle-strip-prefix
+      traefik.http.middlewares.dozzle-strip-prefix.stripprefix.prefix: /dozzle
