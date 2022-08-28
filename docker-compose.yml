@@ -209,7 +209,8 @@ services:
   dozzle:
     image: amir20/dozzle
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: on-failure
     environment:
       DOZZLE_BASE: /dozzle
       DOZZLE_NO_ANALYTICS: true
