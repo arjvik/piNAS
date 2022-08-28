@@ -87,6 +87,7 @@ services:
     volumes:
       - ./index/index.html:/srv/http/index.html:ro
       - ./index/cameras.html:/srv/http/cameras:ro
+      - ./index/robots.txt:/srv/http/robots.txt:ro
       - ./.git/refs/heads/master:/srv/http/commit.txt:ro
     labels:
       traefik.enable: true
