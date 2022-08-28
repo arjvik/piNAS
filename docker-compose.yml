@@ -221,3 +221,17 @@ services:
       traefik.http.routers.dozzle.rule: PathPrefix(`/dozzle`)
       traefik.http.routers.dozzle.entrypoints: websecure
       traefik.http.routers.dozzle.middlewares: ip-whitelist,basicauth
+  diun:
+    image: crazymax/diun
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: on-failure
+    environment:
+      TZ: ${DIUN_TIMEZONE:?}
+      LOG_LEVEL: info
+      DIUN_WATCH_SCHEDULE: ${DIUN_WATCH_SCHEDULE:?}
+      DIUN_PROVIDERS_DOCKER: true
+      DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT: true
+      DIUN_NOTIF_SCRIPT_CMD: sh
+      DIUN_NOTIF_SCRIPT_ARGS: '-c,wget --post-data "title=New version of $$DIUN_ENTRY_IMAGE&body=Released on $$DIUN_ENTRY_CREATED. See $$DIUN_ENTRY_HUBLINK. Repo $$DIUN_ENTRY_DIGEST" -q -O /dev/stdout apprise/notify/main'
+    restart: always
