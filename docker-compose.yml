@@ -156,6 +156,13 @@ services:
       APPRISE_ALLOW_SERVICES: ntfys
       APPRISE_STATEFUL_MODE: simple
       APPRISE_CONFIG_LOCK: 'yes'
+    labels:
+      traefik.enable: true
+      traefik.http.services.apprise.loadbalancer.server.port: 80
+      traefik.http.routers.apprise.rule: PathPrefix(`/apprise`)
+      traefik.http.routers.apprise.entrypoints: websecure
+      traefik.http.routers.apprise.middlewares: ip-whitelist,apprise-strip-prefix
+      traefik.http.middlewares.apprise-strip-prefix.stripprefix.prefixes: /apprise
   btrfs-maintenance:
     build: ./btrfs-maintenance
     restart: on-failure
