@@ -161,8 +161,8 @@ services:
       traefik.http.services.apprise.loadbalancer.server.port: 80
       traefik.http.routers.apprise.rule: PathPrefix(`/apprise`)
       traefik.http.routers.apprise.entrypoints: websecure
-      traefik.http.routers.apprise.middlewares: ip-whitelist,apprise-strip-prefix
-      traefik.http.middlewares.apprise-strip-prefix.stripprefix.prefixes: /apprise
+      traefik.http.routers.apprise.middlewares: ip-whitelist,apprise-replace-path
+      traefik.http.middlewares.apprise-replace-path.replacepath.path: /notify/main
   btrfs-maintenance:
     build: ./btrfs-maintenance
     restart: on-failure
