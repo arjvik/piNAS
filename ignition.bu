@@ -1,0 +1,16 @@
+variant: fcos
+version: 1.4.0
+passwd:
+  users:
+    - name: core
+      groups:
+        - sudo
+        - wheel
+      ssh_authorized_keys:
+        - ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAGs+/5XcvtDQhzyucWIB6G7Ux9ONhKLqDFeA2wrzs0ZbfkMF+l/DGRZPcKToUWnIOPWmLaQbFfCrmbtW9DrGdHWcAEM4XccYgz6jpZCJMTY80JDZ07svZGJcGYdikFfHQ1iaZfoPWHLtcM7THUJVEVRep+wIWo1iXGPJOBt6HQ7/lvlCA==
+storage:
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: tau
