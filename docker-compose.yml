@@ -241,4 +241,3 @@ services:
       DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT: true
       DIUN_NOTIF_SCRIPT_CMD: sh
       DIUN_NOTIF_SCRIPT_ARGS: '-c,wget --post-data "title=New version of $$DIUN_ENTRY_IMAGE&body=Released on $$DIUN_ENTRY_CREATED. See $$DIUN_ENTRY_HUBLINK. Repo $$DIUN_ENTRY_DIGEST" -q -O /dev/stdout apprise/notify/main'
-    restart: always
