@@ -23,6 +23,8 @@ services:
     restart: on-failure
     environment:
       CLOUDFLARE_DNS_API_TOKEN: ${TRAEFIK_CLOUDFLARE_DNS_API_TOKEN:?}
+    dns:
+      - 1.1.1.1
     ports:
       - 80:80
       - 443:443
