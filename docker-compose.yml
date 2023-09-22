@@ -204,16 +204,9 @@ services:
       traefik.http.routers.ipcamera-mjpeg3.entrypoints: websecure
       traefik.http.routers.ipcamera-mjpeg3.middlewares: ip-whitelist,basicauth,mjpeg-strip-prefix
   cloudflared:
-    build: ./cloudflared
-    command:
-      - >
-        busybox rm -rf ~/.cloudflared && busybox mkdir ~/.cloudflared &&
-        echo '${CLOUDFLARED_CERTIFICATES:?}' | busybox base64 -d > ~/.cloudflared/cert.pem &&
-        echo '${CLOUDFLARED_SSH_TUNNEL_CREDENTIALS:?}' > ~/.cloudflared/${CLOUDFLARED_SSH_TUNNEL_UUID:?}.json &&
-        exec cloudflared --no-autoupdate tunnel run ${CLOUDFLARED_SSH_TUNNEL_NAME:?}
+    image: cloudflare/cloudflared
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
     restart: on-failure
-    environment:
-      TUNNEL_URL: ${CLOUDFLARED_SSH_TUNNEL_ENDPOINT:?}
     extra_hosts:
       - docker.host:host-gateway
   dozzle:
