@@ -17,5 +17,3 @@ Connect to WebDAV share on Windows:
 ```
 
 Commit: ` `
-
-[![Built With: Love](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/arjvik/) [![Designed In: Etch-A-Sketch](https://forthebadge.com/images/badges/designed-in-etch-a-sketch.svg)](https://github.com/arjvik/piNAS/#contains-configuration-for) [![Powered By: Black Magic](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://www.docker.com/) [![Uses: Badges](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com/)

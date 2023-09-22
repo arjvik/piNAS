@@ -3,10 +3,11 @@
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 <link href="https://fonts.cdnfonts.com/css/tex-gyre-adventor" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic' rel='stylesheet' type='text/css' /><link href='https://fonts.googleapis.com/css?family=Raleway:600,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+<link href='https://fonts.loli.net/css?family=Didact+Gothic&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 .mac-os-11 { --title-bar-height:28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
 iframe { margin: auto; }
 a.url { word-break: break-all; }
 a:active, a:hover { outline: 0px; }
@@ -22,8 +23,6 @@ body.typora-export { padding-left: 30px; padding-right: 30px; }
 @media screen and (max-width: 500px) {
   body.typora-export { padding-left: 0px; padding-right: 0px; }
   #write { padding-left: 20px; padding-right: 20px; }
-  .CodeMirror-sizer { margin-left: 0px !important; }
-  .CodeMirror-gutters { display: none !important; }
 }
 #write li > figure:last-child { margin-bottom: 0.5rem; }
 #write ol, #write ul { position: relative; }
@@ -51,7 +50,7 @@ sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inh
 #write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
 figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
 figure > table { margin: 0px; }
-tr { break-inside: avoid; break-after: auto; }
+thead, tr { break-inside: avoid; break-after: auto; }
 thead { display: table-header-group; }
 table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
 table.md-table td { min-width: 32px; }
@@ -73,6 +72,7 @@ div.hr:focus { cursor: none; }
 #write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
 .md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
 .CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
 .footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
 .footnotes + .footnotes { margin-top: 0px; }
 .md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
@@ -87,12 +87,14 @@ blockquote > :first-child, li > :first-child { margin-top: 0px; }
 #write .footnote-line { white-space: pre-wrap; }
 @media print {
   body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
-  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
   .typora-export * { -webkit-print-color-adjust: exact; }
   .typora-export #write { break-after: avoid; }
   .typora-export #write::after { height: 0px; }
   .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
   .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
 }
 .footnote-line { margin-top: 0.714em; font-size: 0.7em; }
 a img, img a { cursor: pointer; }
@@ -130,6 +132,7 @@ p > .md-image:only-child { display: inline-block; width: 100%; }
 }
 a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
 .footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
 .md-attr { display: none; }
 .md-fn-count::after { content: "."; }
 code, pre, samp, tt { font-family: var(--monospace); }
@@ -168,7 +171,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 @media screen and (max-width: 800px) {
   .typora-export-sidebar { display: none; }
 }
-.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
 .outline-content ul { margin-top: 0px; margin-bottom: 0px; }
 .outline-content strong { font-weight: 400; }
 .outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
@@ -199,6 +202,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 .typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
 .typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
 .md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
 
 
 .CodeMirror { height: auto; }
@@ -282,10 +286,10 @@ span.cm-strikethrough { text-decoration: line-through; }
 }
 
 
-@include-when-export url(https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic);
-@include-when-export url(https://fonts.googleapis.com/css?family=Raleway:600,400&subset=latin,latin-ext);
+@include-when-export url(https://fonts.loli.net/css?family=Didact+Gothic&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext);
 
-
+/* cyrillic-ext */
+/* cyrillic */
 :root {
 	--window-border: none;
 	--typora-center-window-title: true;
@@ -295,7 +299,7 @@ span.cm-strikethrough { text-decoration: line-through; }
 }
 
 .mac-seamless-mode #typora-sidebar {
-	top: var(--mac-title-bar-height);
+	top: 20px;
 	padding-top: 0;
 	height: auto;
 }
@@ -304,8 +308,10 @@ html,
 body,
 #write{
 	background: #fcfcfc;
-	font-family: 'TeXGyreAdventor', "Century Gothic", 'Yu Gothic', 'Raleway', "STHeiti", sans-serif;
+	background: var(--bg-color);
+	font-family: 'TeXGyreAdventor', "Century Gothic", "Didact Gothic", "Yu Gothic", 'Segoe UI Emoji', sans-serif;
 	font-weight: 300;
+	-webkit-font-smoothing: antialiased;
 }
 h1,
 h2,
@@ -314,7 +320,7 @@ h4,
 h5,
 h6 {
 	color: #111;
-	font-family: 'TeXGyreAdventor', "Century Gothic", 'Yu Gothic', 'Ubuntu', "STHeiti", sans-serif;
+	font-family: 'TeXGyreAdventor', "Century Gothic", "Didact Gothic", "Yu Gothic", sans-serif;
 }
 
 html {
@@ -324,6 +330,12 @@ html {
 #write {
 	max-width: 914px;
 	text-align: justify;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
 }
 
 #write>h1:first-child {
@@ -396,44 +408,6 @@ p {
 	top: .125rem;
 	padding: 2px;
 }
-/*@media screen and (min-width: 48em) {
-	.h1,
-	h1 {
-		font-size: 3.250rem;
-	}
-	.h2,
-	h2 {
-		font-size: 2.298rem;
-	}
-	.h3,
-	h3 {
-		font-size: 1.625rem;
-	}
-	.h4,
-	h4 {
-		font-size: 1.250rem;
-	}
-	.h5,
-	h5 {
-		font-size: 1.150rem;
-	}
-	.h6,
-	h6 {
-		font-size: 1rem;
-	}
-	#write>h4.md-focus:before,
-	#write>h5.md-focus:before,
-	#write>h6.md-focus:before {
-		top: 1px;
-	}
-	p {
-		font-size: 1.25rem;
-		line-height: 1.8;
-	}
-	table {
-		font-size: 1.25rem;
-	}
-}*/
 @media screen and (max-width: 48em) {
 	blockquote {
 		margin-left: 1rem;
@@ -523,9 +497,16 @@ code, .md-fences {
 	padding-left:2.125rem;
 }
 
+input {
+	border-style: ridge;
+}
+
 .task-list-item input {
 	top: 3px;
+}
 
+.md-task-list-item input {
+	margin-left: -1.5em;
 }
 
 .task-list-item input:before {
@@ -538,15 +519,21 @@ code, .md-fences {
 	border: 1px solid gray;
 	background-color: #fdfdfd;
 	margin-left: 0;
-	margin-top: -0.8rem;
+	-webkit-appearance: none;
+	margin-top: -1rem;
 }
+
+.typora-node .task-list-item input:before {
+	top: 0.3ex;
+	position: absolute;
+}
+
 .task-list-item input:checked:before,
 .task-list-item input[checked]:before{
 	content: '\25FC';
 	/*◘*/
 	font-size: 0.8125rem;
 	line-height: 0.9375rem;
-	margin-top: -1rem;
 }
 
 /* Chrome 29+ */
@@ -654,10 +641,18 @@ p.mathjax-block,
 	line-height: 20px;
 }
 
+.ty-table-edit {
+	background: #ededed;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
 
 </style><title>zob.one</title>
 </head>
 <body class='typora-export'><div class='typora-export-content'>
-<div id='write'  class=''><h1 id='zobone'><span>zob.one</span></h1><p><span>Files: </span><a href='/sftpgo'><span>zob.one/sftpgo</span></a></p><p><span>Camera: </span><a href='/cameras'><span>zob.one/cameras</span></a></p><p><span>Connect to WebDAV share on Windows:</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.25px; left: 3.9974px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">\\zob.one@SSL\dav</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p><span>Commit: </span><code></code></p><p><a href='https://github.com/arjvik/'><img src="https://forthebadge.com/images/badges/built-with-love.svg" referrerpolicy="no-referrer" alt="Built With: Love"></a><span> </span><a href='https://github.com/arjvik/piNAS/#contains-configuration-for'><img src="https://forthebadge.com/images/badges/designed-in-etch-a-sketch.svg" referrerpolicy="no-referrer" alt="Designed In: Etch-A-Sketch"></a><span> </span><a href='https://www.docker.com/'><img src="https://forthebadge.com/images/badges/powered-by-black-magic.svg" referrerpolicy="no-referrer" alt="Powered By: Black Magic"></a><span> </span><a href='https://forthebadge.com/'><img src="https://forthebadge.com/images/badges/uses-badges.svg" referrerpolicy="no-referrer" alt="Uses: Badges"></a></p></div></div>
+<div id='write'  class=''><h1 id='zobone'><span>zob.one</span></h1><p><span>Files: </span><a href='/sftpgo'><span>zob.one/sftpgo</span></a></p><p><span>Camera: </span><a href='/cameras'><span>zob.one/cameras</span></a></p><p><span>Connect to WebDAV share on Windows:</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.42188px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">\\zob.one@SSL\dav</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p><span>Commit: </span><code></code></p></div></div>
 <script>fetch('/commit.txt').then((response) => response.text()).then(hash => document.querySelector('code').innerHTML = hash.substring(0, 7));</script></body>
 </html>

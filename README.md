@@ -1,7 +1,5 @@
 # pi NAS
 
-[![Built With: Love](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/arjvik/) [![Designed In: Etch-A-Sketch](https://forthebadge.com/images/badges/designed-in-etch-a-sketch.svg)](https://github.com/arjvik/piNAS/#contains-configuration-for) [![Powered By: Black Magic](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://www.docker.com/) [![Uses: Badges](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com/)
-
 Containerized (using [docker](https://www.docker.com/products/container-runtime) and [docker-compose](https://docs.docker.com/compose/compose-file/compose-file-v3/)) setup for a Network Attached Storage (NAS) server, meant to run on a Raspberry Pi 4.
 
 ### Contains configuration for
